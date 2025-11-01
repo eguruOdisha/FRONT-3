@@ -142,30 +142,6 @@
             transition: width 0.1s linear;
         }
         
-        /* Back Button */
-        .back-btn {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 16px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            margin-bottom: 16px;
-            border: none;
-        }
-        
-        .back-btn:active {
-            transform: scale(0.95);
-        }
-        
         /* Page Title */
         .page-title {
             color: white;
@@ -216,6 +192,31 @@
             font-weight: 700;
             line-height: 1.4;
         }
+        
+        /* Back Button */
+        .back-btn {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 18px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: 8px;
+        }
+        
+        .back-btn:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body>
@@ -230,11 +231,6 @@
     </script>
     
     <div class="container">
-        <button class="back-btn" onclick="window.close()">
-            <span>←</span>
-            <span>Close Window</span>
-        </button>
-        
         <div class="audio-card" id="socialAudioCard">
             <div class="audio-content">
                 <div class="audio-icon" id="socialAudioIcon">🔇</div>
@@ -271,6 +267,11 @@
                 <span class="social-btn-text">ଜ୍ଯୋତିଷଶାସ୍ତ୍ର ଏବଂ ଆଧ୍ୟାତ୍ମିକ ଜ୍ଞାନ ବୃଦ୍ଧି ପାଇଁ ଅନ୍-ଲାଇନ୍ ବ୍ୟବସ୍ଥା</span>
             </a>
         </div>
+        
+        <a href="https://sites.google.com/view/odia-sahayak/home" class="back-btn" target="_blank" rel="noopener noreferrer">
+            <span>🏠</span>
+            <span>ମୁଖ୍ୟ ପୃଷ୍ଠାକୁ ଫେରନ୍ତୁ</span>
+        </a>
     </div>
 
     <script>
