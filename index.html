@@ -274,6 +274,29 @@
     </div>
 
     <script>
+        // Handle browser back button
+        window.addEventListener('load', () => {
+            // Check if this window was opened by another window
+            if (window.history.length <= 1 || window.opener) {
+                // Override back button behavior
+                window.history.pushState(null, '', window.location.href);
+                window.addEventListener('popstate', () => {
+                    window.history.pushState(null, '', window.location.href);
+                    // Try to close the window, if it fails, user opened directly
+                    if (window.opener) {
+                        window.close();
+                    } else {
+                        // Show a message if window can't be closed
+                        if (confirm('Close this page?')) {
+                            window.close();
+                        } else {
+                            window.history.pushState(null, '', window.location.href);
+                        }
+                    }
+                });
+            }
+        });
+        
         // Audio manager for social help page
         const audioManager = {
             url: 'https://raw.githubusercontent.com/eguruOdisha/FRONT/main/ospg12.mp3',
