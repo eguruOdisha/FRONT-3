@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Help Portal - Social Help</title>
+    <title>Help Portal - Education</title>
     <style>
         * {
             margin: 0;
@@ -176,45 +176,139 @@
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
         
-        /* Social Help Buttons */
-        .social-buttons {
+        /* Category Section */
+        .category-section {
+            margin-bottom: 16px;
+        }
+        
+        .category-header {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.35), rgba(118, 75, 162, 0.35));
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 20px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+            color: white;
             display: flex;
-            flex-direction: column;
-            gap: 12px;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .category-header:active {
+            transform: scale(0.98);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.45), rgba(118, 75, 162, 0.45));
+        }
+        
+        .category-header.active {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.5), rgba(118, 75, 162, 0.5));
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.5);
+        }
+        
+        .category-icon {
+            font-size: 42px;
+            min-width: 42px;
+        }
+        
+        .category-info {
+            flex: 1;
+        }
+        
+        .category-name {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+        
+        .category-count {
+            font-size: 13px;
+            opacity: 0.85;
+            font-weight: 600;
+        }
+        
+        .category-arrow {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+        
+        .category-header.active .category-arrow {
+            transform: rotate(90deg);
+        }
+        
+        /* Subjects Container */
+        .subjects-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, margin-top 0.4s ease;
+            margin-top: 0;
+        }
+        
+        .subjects-container.expanded {
+            max-height: 2000px;
             margin-top: 12px;
         }
         
-        .social-btn {
-            background: linear-gradient(135deg, rgba(79, 172, 254, 0.3), rgba(0, 242, 254, 0.3));
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .subject-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 18px;
-            padding: 16px 20px;
+            border-radius: 16px;
+            padding: 14px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
             color: white;
             text-decoration: none;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+            justify-content: center;
+            min-height: 85px;
         }
         
-        .social-btn:active {
-            transform: scale(0.97);
-            background: linear-gradient(135deg, rgba(79, 172, 254, 0.4), rgba(0, 242, 254, 0.4));
+        .subject-card:active {
+            transform: scale(0.95);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4));
         }
         
-        .social-btn-icon {
-            font-size: 32px;
-            min-width: 32px;
+        .subject-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
         }
         
-        .social-btn-text {
-            flex: 1;
-            font-size: 14px;
+        .subject-name {
+            font-size: 12px;
             font-weight: 700;
-            line-height: 1.4;
+            line-height: 1.3;
+        }
+        
+        /* Content wrapper */
+        .content-wrapper {
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        
+        .content-wrapper::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .content-wrapper::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+        
+        .content-wrapper::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
         }
     </style>
 </head>
@@ -235,48 +329,200 @@
             <span>Close Window</span>
         </button>
         
-        <div class="audio-card" id="socialAudioCard">
+        <div class="audio-card" id="eduAudioCard">
             <div class="audio-content">
-                <div class="audio-icon" id="socialAudioIcon">🔇</div>
+                <div class="audio-icon" id="eduAudioIcon">🔇</div>
                 <div class="audio-text">
                     <div class="audio-title">ଶୁଣିବା ପାଇଁ ଏଠାରେ କ୍ଲିକ୍ କରନ୍ତୁ ।</div>
-                    <div class="audio-subtitle" id="socialAudioStatus">Tap to play audio</div>
+                    <div class="audio-subtitle" id="eduAudioStatus">Tap to play audio</div>
                 </div>
             </div>
             <div class="audio-progress">
-                <div class="audio-progress-bar" id="socialProgressBar"></div>
+                <div class="audio-progress-bar" id="eduProgressBar"></div>
             </div>
         </div>
         
-        <div class="page-title">🤝 Social Help Services</div>
+        <div class="page-title">📚 Educational Help</div>
         
-        <div class="social-buttons">
-            <a href="#" class="social-btn" onclick="openSocialHelp(event, 'justice')">
-                <span class="social-btn-icon">⚖️</span>
-                <span class="social-btn-text">ନ୍ୟାୟ ପାଇଁ ଅନ୍-ଲାଇନ୍ ସହାୟତା</span>
-            </a>
+        <div class="content-wrapper">
+            <!-- LAW CATEGORY -->
+            <div class="category-section">
+                <div class="category-header" onclick="toggleCategory('law')">
+                    <div class="category-icon">⚖️</div>
+                    <div class="category-info">
+                        <div class="category-name">Law Subjects</div>
+                        <div class="category-count">5 subjects available</div>
+                    </div>
+                    <div class="category-arrow">›</div>
+                </div>
+                <div class="subjects-container" id="law-subjects">
+                    <div class="subjects-grid">
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'BNSS')">
+                            <div class="subject-icon">📖</div>
+                            <div class="subject-name">BNSS</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'BNS')">
+                            <div class="subject-icon">⚖️</div>
+                            <div class="subject-name">BNS</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'BSA')">
+                            <div class="subject-icon">📜</div>
+                            <div class="subject-name">BSA</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'Constitutional Law')">
+                            <div class="subject-icon">🏛️</div>
+                            <div class="subject-name">Constitutional Law</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'CPC')">
+                            <div class="subject-icon">⚖️</div>
+                            <div class="subject-name">CPC</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
             
-            <a href="#" class="social-btn" onclick="openSocialHelp(event, 'government')">
-                <span class="social-btn-icon">🏛️</span>
-                <span class="social-btn-text">ସରକାରଙ୍କ ସହିତ ଯୋଗାଯୋଗ ପାଇଁ ଅନ୍-ଲାଇନ୍ ବ୍ୟବସ୍ଥା</span>
-            </a>
+            <!-- COMMERCE CATEGORY -->
+            <div class="category-section">
+                <div class="category-header" onclick="toggleCategory('commerce')">
+                    <div class="category-icon">💼</div>
+                    <div class="category-info">
+                        <div class="category-name">Commerce Subjects</div>
+                        <div class="category-count">14 subjects available</div>
+                    </div>
+                    <div class="category-arrow">›</div>
+                </div>
+                <div class="subjects-container" id="commerce-subjects">
+                    <div class="subjects-grid">
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'Accounting-I')">
+                            <div class="subject-icon">📊</div>
+                            <div class="subject-name">Accounting-I</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'Accounting-II')">
+                            <div class="subject-icon">📊</div>
+                            <div class="subject-name">Accounting-II</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'BSM')">
+                            <div class="subject-icon">📈</div>
+                            <div class="subject-name">BSM</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'BMS')">
+                            <div class="subject-icon">💼</div>
+                            <div class="subject-name">BMS</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'FMA')">
+                            <div class="subject-icon">💰</div>
+                            <div class="subject-name">FMA</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'FCA')">
+                            <div class="subject-icon">💵</div>
+                            <div class="subject-name">FCA</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'IT')">
+                            <div class="subject-icon">💻</div>
+                            <div class="subject-name">IT</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'Financial Accounting')">
+                            <div class="subject-icon">💳</div>
+                            <div class="subject-name">Financial Accounting</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'Cost Accounting')">
+                            <div class="subject-icon">📉</div>
+                            <div class="subject-name">Cost Accounting</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'Management Accounting')">
+                            <div class="subject-icon">📋</div>
+                            <div class="subject-name">Management Accounting</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'Business Law')">
+                            <div class="subject-icon">⚖️</div>
+                            <div class="subject-name">Business Law</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'Company Law')">
+                            <div class="subject-icon">🏢</div>
+                            <div class="subject-name">Company Law</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'Income Tax')">
+                            <div class="subject-icon">💰</div>
+                            <div class="subject-name">Income Tax</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'GST')">
+                            <div class="subject-icon">🧾</div>
+                            <div class="subject-name">Goods & Service Tax</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
             
-            <a href="#" class="social-btn" onclick="openSocialHelp(event, 'newspaper')">
-                <span class="social-btn-icon">📰</span>
-                <span class="social-btn-text">ଦୈନିକ ଖବରକାଗଜ ପଢିବା ପାଇଁ ଅନ୍-ଲାଇନ୍ ବ୍ୟବସ୍ଥା</span>
-            </a>
+            <!-- ARTS CATEGORY -->
+            <div class="category-section">
+                <div class="category-header" onclick="toggleCategory('arts')">
+                    <div class="category-icon">🎨</div>
+                    <div class="category-info">
+                        <div class="category-name">Arts Subjects</div>
+                        <div class="category-count">6 subjects available</div>
+                    </div>
+                    <div class="category-arrow">›</div>
+                </div>
+                <div class="subjects-container" id="arts-subjects">
+                    <div class="subjects-grid">
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'Political Science-I')">
+                            <div class="subject-icon">🗳️</div>
+                            <div class="subject-name">Political Science-I</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'Political Science-II')">
+                            <div class="subject-icon">🗳️</div>
+                            <div class="subject-name">Political Science-II</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'Economics-I')">
+                            <div class="subject-icon">📈</div>
+                            <div class="subject-name">Economics-I</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'Economics-II')">
+                            <div class="subject-icon">📊</div>
+                            <div class="subject-name">Economics-II</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'History-I')">
+                            <div class="subject-icon">🏛️</div>
+                            <div class="subject-name">History-I</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'History-II')">
+                            <div class="subject-icon">📜</div>
+                            <div class="subject-name">History-II</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
             
-            <a href="#" class="social-btn" onclick="openSocialHelp(event, 'spiritual')">
-                <span class="social-btn-icon">🕉️</span>
-                <span class="social-btn-text">ଜ୍ଯୋତିଷଶାସ୍ତ୍ର ଏବଂ ଆଧ୍ୟାତ୍ମିକ ଜ୍ଞାନ ବୃଦ୍ଧି ପାଇଁ ଅନ୍-ଲାଇନ୍ ବ୍ୟବସ୍ଥା</span>
-            </a>
+            <!-- OTHER SUBJECTS CATEGORY -->
+            <div class="category-section">
+                <div class="category-header" onclick="toggleCategory('others')">
+                    <div class="category-icon">📝</div>
+                    <div class="category-info">
+                        <div class="category-name">Other Subjects</div>
+                        <div class="category-count">2 subjects available</div>
+                    </div>
+                    <div class="category-arrow">›</div>
+                </div>
+                <div class="subjects-container" id="others-subjects">
+                    <div class="subjects-grid">
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'English-I')">
+                            <div class="subject-icon">📖</div>
+                            <div class="subject-name">English-I</div>
+                        </a>
+                        <a href="#" class="subject-card" onclick="openSubject(event, 'English-II')">
+                            <div class="subject-icon">📚</div>
+                            <div class="subject-name">English-II</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Audio manager for social help page
+        // Audio manager for education page
         const audioManager = {
-            url: 'https://raw.githubusercontent.com/eguruOdisha/FRONT/main/ospg12.mp3',
+            url: 'https://raw.githubusercontent.com/eguruOdisha/FRONT/main/osstudy.mp3',
             audio: new Audio(),
             card: null,
             icon: null,
@@ -288,10 +534,10 @@
         
         // Initialize audio manager
         function initAudioManager() {
-            audioManager.card = document.getElementById('socialAudioCard');
-            audioManager.icon = document.getElementById('socialAudioIcon');
-            audioManager.status = document.getElementById('socialAudioStatus');
-            audioManager.progress = document.getElementById('socialProgressBar');
+            audioManager.card = document.getElementById('eduAudioCard');
+            audioManager.icon = document.getElementById('eduAudioIcon');
+            audioManager.status = document.getElementById('eduAudioStatus');
+            audioManager.progress = document.getElementById('eduProgressBar');
             
             audioManager.audio.crossOrigin = 'anonymous';
             audioManager.audio.preload = 'metadata';
@@ -359,17 +605,58 @@
         
         initAudioManager();
         
-        // Social help links mapping
-        const socialLinks = {
-            'justice': 'https://sites.google.com/view/ospage2/%E0%AC%A8%E0%AD%9F%E0%AD%9F-%E0%AC%B8%E0%AC%B9%E0%AD%9F%E0%AC%95',
-            'government': 'https://sites.google.com/view/ospage2/%E0%AC%B8%E0%AC%B0%E0%AC%95%E0%AC%B0%E0%AC%99%E0%AC%95-%E0%AC%B8%E0%AC%B9%E0%AC%A4-%E0%AC%AF%E0%AC%97%E0%AC%AF%E0%AC%97',
-            'newspaper': 'https://sites.google.com/view/ospage2/%E0%AC%96%E0%AC%AC%E0%AC%B0news',
-            'spiritual': 'https://sites.google.com/view/ospage2/%E0%AC%9C%E0%AC%AF%E0%AC%A4%E0%AC%B7-%E0%AC%8F%E0%AC%AC-%E0%AC%86%E0%AC%A7%E0%AD%9F%E0%AC%A4%E0%AC%AE%E0%AC%95'
+        // Toggle category expansion
+        function toggleCategory(category) {
+            const container = document.getElementById(`${category}-subjects`);
+            const header = container.previousElementSibling;
+            
+            // Close all other categories
+            document.querySelectorAll('.subjects-container').forEach(c => {
+                if (c !== container && c.classList.contains('expanded')) {
+                    c.classList.remove('expanded');
+                    c.previousElementSibling.classList.remove('active');
+                }
+            });
+            
+            // Toggle current category
+            container.classList.toggle('expanded');
+            header.classList.toggle('active');
+        }
+        
+        // Subject links mapping
+        const subjectLinks = {
+            'BNSS': 'https://sites.google.com/view/bnss-chapter-i/home',
+            'BNS': 'https://sites.google.com/view/stpbns/home',
+            'BSA': 'https://sites.google.com/view/bnsstp/home',
+            'Constitutional Law': 'https://sites.google.com/view/bnss-chapter-i/to-be-ready',
+            'CPC': 'https://sites.google.com/view/cpcstp/home',
+            'Accounting-I': 'https://sites.google.com/view/acct1stp/home',
+            'Accounting-II': 'https://sites.google.com/view/acct2stp/home',
+            'BSM': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'BMS': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'FMA': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'FCA': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'IT': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'Financial Accounting': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'Cost Accounting': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'Management Accounting': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'Business Law': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'Company Law': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'Income Tax': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'GST': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'Political Science-I': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'Political Science-II': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'Economics-I': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'Economics-II': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'History-I': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'History-II': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'English-I': 'https://sites.google.com/view/bsm-i/chapter-1',
+            'English-II': 'https://sites.google.com/view/bsm-i/chapter-1'
         };
         
-        function openSocialHelp(event, helpType) {
+        function openSubject(event, subjectName) {
             event.preventDefault();
-            const url = socialLinks[helpType] || 'https://example.com/help-not-found';
+            const url = subjectLinks[subjectName] || 'https://example.com/subject-not-found';
             window.open(url, '_blank', 'noopener,noreferrer');
         }
         
@@ -379,7 +666,7 @@
             }
         });
         
-        document.querySelectorAll('.social-btn, .back-btn, .audio-card').forEach(el => {
+        document.querySelectorAll('.subject-card, .audio-card').forEach(el => {
             el.addEventListener('touchstart', () => {
                 el.style.transform = 'scale(0.95)';
             });
